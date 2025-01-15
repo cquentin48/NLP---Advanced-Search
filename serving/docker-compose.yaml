@@ -1,0 +1,20 @@
+version: '3.8'
+
+networks:
+  prod_net:
+    driver: bridge
+
+services:
+  serving:
+    container_name: serving
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../scripts:/app/scripts
+    ports:
+      - "8080:8080"
+    networks:
+      - prod_net
+    env_file:
+      - .env
